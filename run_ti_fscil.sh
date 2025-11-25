@@ -327,18 +327,16 @@ for i in "${!GPU_ARRAY[@]}"; do
 
     echo "Launching GPU $GPU_ID for classes $GPU_CLASS_START-$GPU_CLASS_END"
 
-    # 백그라운드에서 실행
-    train_on_gpu $GPU_ID $GPU_CLASS_START $GPU_CLASS_END &
+    # 순차 실행 (RAM 부족 방지)
+    train_on_gpu $GPU_ID $GPU_CLASS_START $GPU_CLASS_END
 
     # 다음 GPU의 시작 클래스
     CLASS_IDX=$((GPU_CLASS_END + 1))
 done
 
-# 모든 백그라운드 작업 대기
 echo "======================================="
-echo "Waiting for all GPU processes to complete..."
+echo "All GPU tasks completed!"
 echo "======================================="
-wait
 
 # 임시 폴더 정리
 rm -rf "$TEMP_DATA_ROOT"

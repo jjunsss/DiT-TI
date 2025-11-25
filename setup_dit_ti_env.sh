@@ -50,7 +50,7 @@ conda run -n $ENV_NAME pip install git+https://github.com/huggingface/diffusers.
 
 echo ""
 echo "Step 4/4: Installing other dependencies..."
-conda run -n $ENV_NAME pip install transformers accelerate safetensors sentencepiece protobuf peft
+conda run -n $ENV_NAME pip install transformers accelerate safetensors sentencepiece protobuf peft prodigyopt datasets
 
 echo ""
 echo "=========================================="
