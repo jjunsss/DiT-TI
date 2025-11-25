@@ -327,12 +327,23 @@ for i in "${!GPU_ARRAY[@]}"; do
 
     echo "Launching GPU $GPU_ID for classes $GPU_CLASS_START-$GPU_CLASS_END"
 
-    # 순차 실행 (RAM 부족 방지)
-    train_on_gpu $GPU_ID $GPU_CLASS_START $GPU_CLASS_END
+    # 백그라운드에서 실행
+    train_on_gpu $GPU_ID $GPU_CLASS_START $GPU_CLASS_END &
+
+    # 다음 GPU 시작 전 대기 (모델 로딩 RAM 충돌 방지, 3분)
+    if [ $i -lt $((${#GPU_ARRAY[@]} - 1)) ]; then
+        echo "Waiting 180 seconds before launching next GPU (to avoid RAM overflow during model loading)..."
+        sleep 180
+    fi
 
     # 다음 GPU의 시작 클래스
     CLASS_IDX=$((GPU_CLASS_END + 1))
 done
+
+echo "======================================="
+echo "Waiting for all GPU processes to complete..."
+echo "======================================="
+wait
 
 echo "======================================="
 echo "All GPU tasks completed!"
