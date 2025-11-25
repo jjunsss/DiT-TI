@@ -4,20 +4,28 @@ FLUX.1-dev 모델을 사용한 CUB-200 Few-Shot Class-Incremental Learning (FSCI
 
 ## 환경 설정
 
-### 방법 1: Conda 환경 생성 (권장)
+### 방법 1: 자동 설치 스크립트 (권장)
+
+```bash
+bash setup_dit_ti_env.sh
+```
+
+이 스크립트는 `DiT-TI`라는 이름의 conda 환경을 자동으로 생성하고 모든 필요한 패키지를 설치합니다.
+
+### 방법 2: Conda 환경 파일 사용
 
 ```bash
 # 환경 파일로부터 생성
 conda env create -f environment.yml
-conda activate diffusion-fscil-dit
+conda activate DiT-TI
 ```
 
-### 방법 2: 수동 설치
+### 방법 3: 수동 설치
 
 ```bash
 # Conda 환경 생성
-conda create -n diffusion-fscil-dit python=3.10 -y
-conda activate diffusion-fscil-dit
+conda create -n DiT-TI python=3.10 -y
+conda activate DiT-TI
 
 # PyTorch 설치 (CUDA 11.8)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118

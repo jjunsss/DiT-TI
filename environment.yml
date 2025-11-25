@@ -1,4 +1,4 @@
-name: diffusion-fscil-dit
+name: DiT-TI
 channels:
   - defaults
 dependencies:
