@@ -20,7 +20,7 @@ NUM_SAMPLES=5                # 클래스당 샘플 수 (Base: 랜덤 5장, Inc: 
 
 # ======== 모델 & 학습 설정 ========
 MODEL_NAME="black-forest-labs/FLUX.1-dev"
-CUB_ROOT="datasets/cub-200-2011/CUB_200_2011/images"
+CUB_ROOT="../datasets/cub-200-2011/CUB_200_2011/images"
 OUTPUT_ROOT="cub_fscil_ti"
 TEMP_DATA_ROOT="temp_ti_data"
 
@@ -269,7 +269,7 @@ train_on_gpu() {
         CUDA_VISIBLE_DEVICES=$GPU_ID accelerate launch \
             --num_processes 1 \
             --main_process_port $PORT \
-            DiT_TI/train_dreambooth_lora_flux_advanced.py \
+            train_dreambooth_lora_flux_advanced.py \
             --pretrained_model_name_or_path="$MODEL_NAME" \
             --dataset_name="$TEMP_CLASS_DIR/" \
             --instance_prompt="$INSTANCE_PROMPT" \
